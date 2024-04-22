@@ -1,0 +1,35 @@
+/******************************************************************************
+ *
+ * CitcomSVE-3.0 is a finite element package that solves for dynamic
+ * deformation of planetary mantle and crust in a spherical shell under either
+ * surface or tidal loads. The mantle and crust may assume a fully compressible
+ * or incompressible medium with 3-D viscoelastic structures. The package works
+ * with parallel computers with the number of cores or CPUs greater than 12
+ * (test runs with >6,000 cores). This version was built on CitcomS-3.1.1,
+ * which is a code for planetary mantle convection of a purely viscous flow.
+ * This heading was added to the files in CitcomSVE-3.0 that has been modified
+ * extensively from or new to CitcomS. Following CitcomS, CitcomSVE has been
+ * publicly available as an open source package at github since 2022.
+ *
+ *               Shijie Zhong, University of Colorado
+ ******************************************************************************/
+
+Authors of CitcomS:
+
+Louis Moresi
+Shijie Zhong
+Lijie Han
+Clint Conrad
+Eh Tan
+Michael Gurnis
+Eun-seo Choi
+Pururav Thoutireddy 
+Vlad Manea
+Allen McNamara
+Thorsten Becker
+Wei Leng
+Luis Armendariz
+
+Also see the file ChangeLog.
+
+AUTHORS ends here
