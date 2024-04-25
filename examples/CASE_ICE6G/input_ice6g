@@ -1,0 +1,320 @@
+# git version: c26505b (development)
+datadir="case1_T150"
+datafile="case1_T150"
+
+1Dmodel_from_file=1
+1Dmodel_datafile="model.vm5a"  #"earth_model1"
+compressible=1
+
+apply_SLE=1
+polar_wander=1 #1
+polar_wander_kf=0.9486415895 #0.94816006329080160  #0.95210911991998504 #0.99871614081387960  #0.99474010460406925 #0.93571313011305002  #0.982174137406559
+
+# only for Heaviside=1 or step function loading
+Heaviside=2    # 1: Heaviside   2: ice model e.g., ice6g
+
+apply_potential=0	#0: apply surface loads, or 1:apply tidal potential
+
+# Loading harmonics and amplitude for parameter Heaviside=1
+perturbmag=1e-4		# e.g., 1e-6
+perturbl=16
+perturbm=0
+
+# only useful for Heaviside=2 of some ice model
+load_stages_time_file="../ICE6G_1x1_150/ice6g_150ka_stages_timeA.dat"
+ice_datafile="../ICE6G_1x1_150/ice6g"
+ocean_datafile="../ICE6G_1x1_150/ocn6g"
+nlong=361       
+nlati=181
+
+storage_spacing=8              # write data every ...
+
+ll_max=32
+output_ll_max=32
+
+# for viscosity and rheology
+
+3d_visc_from_file=0      #0 for 1d layered viscosity; 1 for 3d visc from files
+3d_visc_datafile="ViscA/ViscA2x2.dat"
+
+# number of the material groups with different viscosity or elastic parameter
+#num_mat=2
+#shearModulus=1.0,1.0
+
+# for 1d layered viscosity, i.e., only applicable when 3d_visc_from_file=0
+visc0=1.0e0,1.0e5
+VMIN=on 
+visc_min=1.0e-4 #1e-3
+VMAX=on 
+visc_max=5.0e04 #1e5
+
+SDEPV=off	# on for stress-dependent viscosity
+sdepv_misfit=3.e-3 #1.e-3  # relative change cutoff for self-grav iteration
+sdepv_expt=1.0,1.0
+sdepv_trns=2.0e5,2.0e5
+sdepv_bg=0.0,0.0
+sdepv_relax_alpha=0.75
+
+# related to parallel processors, grids and mesh
+nproc_surf=12
+nprocx=4
+nprocy=4
+nprocz=2
+nodex=129	# each cap, no of nodes in one horizontal dirc
+nodey=129 	# each cap, no of nodes in the other horizontal dirc
+nodez=81	# each cap, no of nodes in the radial dirc
+mgunitx=4	# multi-grid base level, no of element
+mgunity=4
+mgunitz=5
+levels=4	# multiplying by 2^(levels-1)
+
+# model domain definition
+radius_inner=0.547088
+radius_outer=1.0
+
+
+# grid radial layers
+r_grid_layers=8
+rr=0.547088,0.81635536,0.89483598,0.9356459,0.96860775,0.98430388,0.99058233,1. #0.547088,0.894836,0.9356459,0.985873,1.0 #0.984301413,1.0
+        #rr is CMB, 1170km, 670,410,200km,100km,60km(mid lithosphere),0km
+        #delta r is 1700, 500, 260, 210, 100,40,60.
+nr=1,27,36,46,61,71,75,81
+        #spacing 65. , 55. , 26. , 14, 10 , 10. , 10
+
+
+# material group in layers
+#num_mat_layer=2  # number of the layers with diff. visc. or elastic parameter
+#n_mat_layer=1,30
+
+# Dimensional parameters to be used for scalings or normalizations
+radius=6371e3
+density=4400
+shearmodulus=1.4305e11
+density_above=0.0
+density_below=10895.623 #9895 #10005.4
+gravacc=9.82
+refvisc=2e21
+
+	# Solver iteration parameters
+accuracy=3e-3		# dv/v and dp/p error tolerance
+tole_compressibility=1e-8	# div(v)/v error tolerance
+
+
+=============================================================
+	#other parameters (you would rarely change them)
+	#other parameters (you would rarely change them)
+	#other parameters (you would rarely change them)
+=============================================================
+
+# Boundary Conditions
+topvbc=0
+topvbxval=0.0
+topvbyval=0.0
+botvbc=0
+botvbxval=0.0
+botvbyval=0.0
+
+# Solver Related Matters
+
+	# additional Uzawa iteration parameters
+additional_acc=1.0e-0		# additional tolerance for del2v solver
+piterations=375 	# maximum number of pressure solve iterations before quit
+
+	#multigrid solver parameters
+mg_cycle=1
+down_heavy=4
+up_heavy=4
+vlowstep=30
+vhighstep=4
+relaxation=0            # 1: conj_grad bottom; 0: gauss_seidal bottom
+
+
+
+self_gravitation=1
+ADV=off
+fixed_timestep=0.0
+finetunedt=0.7
+adv_sub_iterations=2
+adv_gamma=0.5
+
+precond=on
+aug_lagr=off
+aug_number=1.0e3
+
+# Data input and program debugging
+DESCRIBE=off
+BEGINNER=off
+VERBOSE=on
+
+verbose=off
+see_convergence=1
+remove_rigid_rotation=off
+
+rheol=3 
+TDEPV=off    # temperature-dependent viscosity
+viscT=0.0,0.,0.0,0.0,0.0,0.0
+viscE=0.0,0.0,0.0,0.0,0.0,0.0
+variable_te=0 	#0: constant elastic thickness Te, 1: variable Te
+te_datafile="Te_file.dat"	# file for variable Te
+platemargins=0	#0: no weak plate margins; 1: with weak plate margins.
+platemargins_datafile="plate_margins.dat"	# file for weak plate margins.
+
+
+# ------------------------------------------------------
+# DO NOT NEED TO CHANGE THE FOLLOWING PARAMETERS
+# DO NOT NEED TO CHANGE THE FOLLOWING PARAMETERS
+# DO NOT NEED TO CHANGE THE FOLLOWING PARAMETERS
+# DO NOT NEED TO CHANGE THE FOLLOWING PARAMETERS
+
+#- post processing -------------------
+
+        option=0   # 0=>glbl @ target, 2=>time-dep @ lat1/lon1, 3=>glbl @ every
+        target_step=585  # 585=>present 385=>-10kyr  200=>-28kyr
+        start_step=585
+        record_every=10000
+        lat1=-70
+        lat2=0.0
+        long1=90
+        long2=0.0
+        de_deg1=0
+
+#-------------------------------------
+        iteration=200001
+        damping=1.0
+#       AVS=on
+
+        Te_min=10              # km # only used in variable_te=1
+	restart=0
+
+        pure_visc=0
+
+	update_K_steps=5000
+
+rotation_rate=0.0
+
+visc_smooth_method=3
+
+stokes_flow_only=0              # Stokes flow only
+
+rayleigh=0e-0                   # Rayleigh number
+
+        
+Problem=convection              # which built in problem
+Geometry=sphere                 # sphere at the moment 
+#       Solver=cgrad node_assemble=1    # conjugate gradient
+Solver=multigrid node_assemble=1        # multigrid iterative method, store coefficients
+
+
+# SOLVER RELATED MATTERS  (HAVE SENSIBLE DEFAULTS & YOU SHOULD BE CAREFUL CHANGING THESE)
+
+maxsub=1
+maxsamevisc=0
+
+output_format=ascii
+output_optional=surf,botm,horiz_avg
+
+# specify input files
+# Important: when file_vbcs is 1, make sure topvbc is also turned on.
+file_vbcs=0
+vel_bound_file="velbc/velbc_full"
+
+coor=3
+coor_file=""
+
+mat_control=0
+mat_file=""
+
+lith_age=0
+lith_age_file=""
+
+tracer=0
+tracer_file=""
+
+# restart info
+restart=0
+post_p=0
+datadir_old="."
+datafile_old=""
+solution_cycles_init=0
+zero_elapsed_time=1
+
+
+# timestepping information
+minstep=1
+cpu_limits_in_seconds=360000000
+
+lith_age_time=0
+lith_age_depth=0.031400
+mantle_temp=1.000000
+temperature_bound_adj=0
+depth_bound_adj=0.157000
+width_bound_adj=0.087270
+
+
+# miscellaneous information
+inputdiffusicity=1.0
+Q0=0
+
+low_visc_channel=off
+low_visc_wedge=off
+lv_min_radius=0.9764
+lv_max_radius=0.9921
+lv_channel_thickness=0.0047
+lv_reduction=0.5
+
+
+# Tracer information
+tracer=off
+
+tracer_ic_method=0
+tracers_per_element=10
+tracer_file="tracer.dat"
+
+tracer_flavors=0
+ic_method_for_flavors=0
+z_interface=0.700000
+
+regular_grid_deltheta=1.0
+regular_grid_delphi=1.0
+
+chemical_buoyancy=off
+buoy_type=1
+buoyancy_ratio=1.0
+reset_initial_composition=off
+
+
+# Phase Change Information
+Ra_410=0.0
+clapeyron410=0.0235
+transT410=0.78
+width410=0.0058
+
+Ra_670=0.0
+clapeyron670=-0.0235
+transT670=0.875
+width670=0.0058
+
+Ra_cmb=0.0
+clapeyroncmb=-0.0235
+transTcmb=0.875
+widthcmb=0.0058
+
+
+ReferenceT=1600		# not used
+thermdiff=1.0e-6	
+thermexp=3.0e-5
+cp=1250
+
+# Age information
+start_age=4.0
+reset_startage=0
+
+tic_method=1
+num_perturbations=1
+perturblayer=1
+
+toptbc=1	# for temperature BC, not used
+toptbcval=0.0	# for temperature BC, not used
+bottbc=1	# for temperature BC, not used
+bottbcval=0.0	# for temperature BC, not used
+
